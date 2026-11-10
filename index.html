@@ -2219,6 +2219,260 @@
       background: #e2e8f0;
     }
 
+  
+    /* ============================================================
+       CAROUSEL 100VH ALL-IN-ONE (AUCUN SCROLL VERTICAL SUR LA PAGE)
+       ============================================================ */
+    body.mode-carousel {
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden !important;
+    }
+
+    body.mode-carousel main {
+      height: calc(100dvh - 58px);
+      max-height: calc(100dvh - 58px);
+      padding: 0.35rem 0.85rem 0.5rem;
+      overflow: hidden !important;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    body.mode-carousel .toolbar,
+    body.mode-carousel #news-spotlight {
+      display: none !important;
+    }
+
+    body.mode-carousel .carousel-container {
+      flex: 1;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      margin: 0 auto;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* VIEWPORT ET AFFICHES PLUS GRANDES */
+    .orbit-stage-viewport {
+      flex: 1;
+      width: 100%;
+      min-height: 290px;
+      max-height: 480px;
+      position: relative;
+      perspective: 1200px;
+      perspective-origin: 50% 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+      touch-action: pan-y;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .orbit-stage-viewport:active {
+      cursor: grabbing;
+    }
+
+    .orbit-item {
+      position: absolute;
+      width: 245px;
+      height: 365px;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      will-change: transform, opacity;
+      z-index: 10;
+      transition: none; /* Fluidité maximale gérée en direct par requestAnimationFrame */
+    }
+
+    @media (max-width: 680px) {
+      .orbit-item {
+        width: 215px;
+        height: 320px;
+      }
+      body.mode-carousel main {
+        padding: 0.25rem 0.5rem 0.4rem;
+      }
+    }
+
+    .orbit-card-flipper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+    }
+
+    .orbit-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.28), 0 3px 10px rgba(15, 23, 42, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      background: #0f172a;
+      box-sizing: border-box;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .orbit-item.main .orbit-face {
+      border: 3px solid #2563eb;
+      box-shadow: 0 22px 48px -6px rgba(37, 99, 235, 0.4), 0 8px 22px rgba(15, 23, 42, 0.2);
+    }
+
+    .orbit-poster-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .orbit-front-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.0) 40%, rgba(15, 23, 42, 0.4) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.75rem;
+      pointer-events: none;
+    }
+
+    /* BADGE SUPPORT EN HAUT DU POSTER */
+    .orbit-badges-row {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+      pointer-events: none;
+    }
+    .orbit-badge-format {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #ffffff;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* BOUTON LIKE / COEUR DANS LE COIN INFÉRIEUR DROIT DU POSTER */
+    .orbit-card-like-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      pointer-events: auto;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+    .orbit-card-like-btn:active {
+      transform: scale(0.88);
+    }
+    .orbit-card-like-btn.active {
+      background: #ffffff;
+      border-color: rgba(225, 29, 72, 0.35);
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+    }
+
+    /* BANDEAU DU BAS : TITRE, ANNÉE, FORMAT, SCRUBBER ET BOUTON */
+    body.mode-carousel .carousel-controls-sheet {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 0.75rem 1rem 0.85rem;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      box-sizing: border-box;
+    }
+
+    .carousel-film-meta {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .carousel-meta-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .carousel-meta-sub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .carousel-meta-format {
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    .carousel-scrub-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      width: 100%;
+    }
+
+    .btn-carousel-main {
+      width: 100%;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      padding: 0.68rem 1rem;
+      border-radius: 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+      transition: all 0.15s ease;
+    }
+    .btn-carousel-main:active {
+      transform: scale(0.98);
+      background: #1e293b;
+    }
+
   </style>
 </head>
 <body>
@@ -2668,6 +2922,8 @@
       currentViewMode = mode;
       localStorage.setItem("cinetheque_view", mode);
 
+      document.body.classList.toggle("mode-carousel", mode === "carousel");
+
       const btnGrid = document.getElementById("btnViewGrid");
       const btnCarousel = document.getElementById("btnViewCarousel");
       const sideGrid = document.getElementById("sidebar-view-grid");
@@ -2823,7 +3079,11 @@
       if (currentViewMode === "carousel") {
         if (gridEl) gridEl.style.display = "none";
         if (carEl) carEl.style.display = "flex";
-        renderOrbitCarousel();
+        if (typeof buildOrbitCards === "function") {
+          buildOrbitCards();
+        } else if (typeof renderOrbitCarousel === "function") {
+          renderOrbitCarousel();
+        }
       } else {
         if (gridEl) gridEl.style.display = "grid";
         if (carEl) carEl.style.display = "none";
@@ -3316,18 +3576,19 @@
     renderStats();
     renderMovies();
   </script>
-</body>
-</html>
+
 <script>
     /* ============================================================
-       ROUE D'INERTIE & CARROUSEL FLUIDE CONTINU (MOMENTUM WHEEL)
-       - Maintien du doigt : défilement continu proportionnel
-       - Lancer : rotation par inertie jusqu'à arrêt naturel ou toucher pour stopper
-       - Clic/Tap : ouverture directe de la fiche complète
+       ROUE D'INERTIE CONTINUE & CARROUSEL FLUIDE SANS RE-RENDER DOM
+       - Stabilité DOM totale (aucun innerHTML pendant le geste -> pas de perte de touch)
+       - Affiches centrales nettement plus grandes (scale 1.15 vs 0.85)
+       - Bouton Like (coeur) directement dans le coin inférieur droit du poster
+       - Bandeau bas épuré : Uniquement Titre, Année et Format
+       - Plein écran sans scroll vertical sur la page
        ============================================================ */
-    let carouselProgress = 0;       // Position continue (flottant 0.0 .. N-1)
+    let carouselProgress = 0;       // Position continue flottante (0.0 .. N-1)
     let carouselVelocity = 0;       // Vitesse angulaire (progress/ms)
-    let isInteracting = false;      // En cours de touch/drag
+    let isInteracting = false;      // Doigt ou souris maintenu
     let dragStartX = 0;
     let dragStartY = 0;
     let dragStartProgress = 0;
@@ -3338,8 +3599,40 @@
     let momentumRafId = null;
     let lastMomentumTime = 0;
 
-    // Sensibilité : pixels de déplacement pour 1 carte
-    const PX_PER_CARD = 140;
+    const PX_PER_CARD = 145;        // Pixels de déplacement pour avancer d'une carte
+
+    function isMovieInWishlist(m) {
+      if (!m) return false;
+      return wishlist.some(w => (w.tmdb_id && w.tmdb_id === m.tmdb_id) || (w.title === m.title));
+    }
+
+    function toggleLikeFromCard(originalIndex) {
+      const list = getCurrentList();
+      const m = list[originalIndex];
+      if (!m) return;
+
+      const wishIdx = wishlist.findIndex(w => (w.tmdb_id && w.tmdb_id === m.tmdb_id) || (w.title === m.title));
+      if (wishIdx >= 0) {
+        wishlist.splice(wishIdx, 1);
+        showToast(`♥ "${m.tmdb_title || m.title}" retiré des souhaits.`);
+      } else {
+        wishlist.unshift({ ...m, format: m.format || "4K UHD", edition: m.edition || "Standard" });
+        showToast(`♥ "${m.tmdb_title || m.title}" ajouté aux souhaits !`);
+      }
+      saveState();
+      
+      // Mise à jour visuelle immédiate de l'icône coeur
+      const likeBtn = document.getElementById("orbit-like-" + originalIndex);
+      if (likeBtn) {
+        const isNowFav = isMovieInWishlist(m);
+        likeBtn.classList.toggle("active", isNowFav);
+        const svg = likeBtn.querySelector("svg");
+        if (svg) {
+          svg.setAttribute("fill", isNowFav ? "#e11d48" : "rgba(15,23,42,0.4)");
+          svg.setAttribute("stroke", isNowFav ? "#e11d48" : "#ffffff");
+        }
+      }
+    }
 
     function stopMomentum() {
       carouselVelocity = 0;
@@ -3350,14 +3643,10 @@
       lastMomentumTime = 0;
     }
 
-    function renderOrbitCarousel() {
+    // Création initiale des cartes DOM (appelée uniquement au changement de liste ou filtres)
+    function buildOrbitCards() {
       const items = getFilteredMovies();
       const viewport = document.getElementById("orbit-viewport");
-      const range = document.getElementById("carousel-range");
-      const counterTag = document.getElementById("carousel-counter-tag");
-      const metaEl = document.getElementById("carousel-film-meta");
-      const actionsEl = document.getElementById("carousel-action-buttons");
-
       if (!viewport) return;
 
       if (!items || items.length === 0) {
@@ -3367,6 +3656,9 @@
             <p style="font-size: 0.95rem; font-weight:600;">Aucun film ne correspond à vos filtres.</p>
           </div>
         `;
+        const metaEl = document.getElementById("carousel-film-meta");
+        const actionsEl = document.getElementById("carousel-action-buttons");
+        const counterTag = document.getElementById("carousel-counter-tag");
         if (metaEl) metaEl.innerHTML = '';
         if (actionsEl) actionsEl.innerHTML = '';
         if (counterTag) counterTag.innerText = '0 / 0';
@@ -3377,100 +3669,135 @@
       if (carouselProgress < 0) carouselProgress = 0;
       if (carouselProgress > total - 1) carouselProgress = total - 1;
 
-      const activeIntIdx = Math.round(carouselProgress);
-      carouselActiveIndex = activeIntIdx;
-
-      if (range && !isInteracting) {
-        range.max = total - 1;
-        range.value = activeIntIdx;
-      }
-      if (counterTag) {
-        counterTag.innerText = `${activeIntIdx + 1} / ${total}`;
-      }
-
-      // Rendu fenêtré autour de la position courante (-3.5 .. +3.5)
-      const minIdx = Math.max(0, Math.floor(carouselProgress - 3.6));
-      const maxIdx = Math.min(total - 1, Math.ceil(carouselProgress + 3.6));
-
-      const isMobile = window.innerWidth <= 680;
-      const radius = isMobile ? 320 : 380;
-      const anglePerStep = isMobile ? 21 : 23;
-
-      let htmlCards = "";
-      for (let idx = minIdx; idx <= maxIdx; idx++) {
-        const m = items[idx];
-        const offset = idx - carouselProgress; // Décalage continu en nombre de cartes
-        const angle = offset * anglePerStep;
-        const rad = (angle * Math.PI) / 180;
-        const tx = Math.sin(rad) * radius;
-        const tz = (Math.cos(rad) - 1) * radius;
-        const scale = Math.max(0.48, 1 - Math.abs(offset) * 0.14);
-        const opacity = Math.max(0.12, 1 - Math.abs(offset) * 0.25);
-        const zIndex = Math.round(100 - Math.abs(offset) * 15);
-        const isMain = Math.abs(offset) < 0.5;
+      viewport.innerHTML = items.map((m, idx) => {
         const originalIndex = getCurrentList().indexOf(m);
+        const isFav = isMovieInWishlist(m);
 
-        htmlCards += `
-          <div class="orbit-item ${isMain ? 'main' : ''}" 
-               style="transform: translate3d(${tx.toFixed(1)}px, 0, ${tz.toFixed(1)}px) rotateY(${angle.toFixed(1)}deg) scale(${scale.toFixed(3)}); z-index: ${zIndex}; opacity: ${opacity.toFixed(2)}; pointer-events: auto;"
-               data-idx="${idx}"
-               data-orig="${originalIndex}"
-               onclick="onOrbitCardTap(${idx}, ${originalIndex})">
+        return `
+          <div class="orbit-item" id="orbit-card-${idx}" data-idx="${idx}" data-orig="${originalIndex}" onclick="onCardClick(${idx}, ${originalIndex})">
             <div class="orbit-card-flipper">
               <div class="orbit-face orbit-face-front">
                 <img src="${m.poster_url}" class="orbit-poster-img" alt="${m.title}" loading="lazy">
                 <div class="orbit-front-overlay">
                   <div class="orbit-badges-row">
                     <span class="orbit-badge-format">${m.format || 'Blu-ray'}</span>
-                    ${m.vote_average ? `<span class="orbit-badge-score">★ ${Number(m.vote_average).toFixed(1)}</span>` : ''}
                   </div>
-                  <div class="orbit-flip-cue">
-                    <span>Toucher pour ouvrir</span> 📋
-                  </div>
+                  <!-- LOGO DU LIKE DANS LE COIN INFÉRIEUR DROIT DU POSTER -->
+                  <button class="orbit-card-like-btn ${isFav ? 'active' : ''}" 
+                          id="orbit-like-${originalIndex}"
+                          onclick="event.stopPropagation(); toggleLikeFromCard(${originalIndex})" 
+                          title="Ajouter aux souhaits"
+                          aria-label="Aimer / Souhait">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="${isFav ? '#e11d48' : 'rgba(15,23,42,0.4)'}" stroke="${isFav ? '#e11d48' : '#ffffff'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         `;
-      }
-      viewport.innerHTML = htmlCards;
+      }).join('');
 
-      // Métadonnées sous la roue
-      const activeMovie = items[activeIntIdx];
-      if (metaEl && activeMovie) {
+      applyOrbitPositions();
+    }
+
+    // Mise à jour continue des positions par transformation CSS (SANS TOUCHER AU DOM)
+    function applyOrbitPositions() {
+      const items = getFilteredMovies();
+      if (!items || items.length === 0) return;
+
+      const total = items.length;
+      if (carouselProgress < 0) carouselProgress = 0;
+      if (carouselProgress > total - 1) carouselProgress = total - 1;
+
+      const activeIntIdx = Math.round(carouselProgress);
+      carouselActiveIndex = activeIntIdx;
+
+      const isMobile = window.innerWidth <= 680;
+      const radius = isMobile ? 310 : 380;
+      const anglePerStep = isMobile ? 22 : 24;
+
+      for (let idx = 0; idx < total; idx++) {
+        const card = document.getElementById("orbit-card-" + idx);
+        if (!card) continue;
+
+        const offset = idx - carouselProgress;
+        const absOffset = Math.abs(offset);
+
+        // Au-delà de 3.6 cartes de distance, masquer pour préserver le GPU
+        if (absOffset > 3.6) {
+          card.style.display = "none";
+          continue;
+        }
+
+        card.style.display = "block";
+
+        const angle = offset * anglePerStep;
+        const rad = (angle * Math.PI) / 180;
+        const tx = Math.sin(rad) * radius;
+        const tz = (Math.cos(rad) - 1) * radius;
+
+        // ÉCHELLE : LA CARTE CENTRALE EST NETTEMENT PLUS GRANDE (1.15) QUE CELLES SUR LES CÔTÉS (0.86, 0.68)
+        const scale = Math.max(0.48, 1.15 - absOffset * 0.24);
+        const opacity = Math.max(0.12, 1 - absOffset * 0.26);
+        const zIndex = Math.round(100 - absOffset * 15);
+
+        card.style.transform = `translate3d(${tx.toFixed(1)}px, 0, ${tz.toFixed(1)}px) rotateY(${angle.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
+        card.style.zIndex = zIndex;
+        card.style.opacity = opacity.toFixed(2);
+        card.classList.toggle("main", absOffset < 0.5);
+      }
+
+      // BANDEAU DU BAS : UNIQUEMENT TITRE, ANNÉE ET FORMAT
+      updateBottomBar(items[activeIntIdx], activeIntIdx, total);
+    }
+
+    function updateBottomBar(movie, activeIdx, total) {
+      const metaEl = document.getElementById("carousel-film-meta");
+      const range = document.getElementById("carousel-range");
+      const counterTag = document.getElementById("carousel-counter-tag");
+      const actionsEl = document.getElementById("carousel-action-buttons");
+
+      if (range && !isInteracting) {
+        range.max = total - 1;
+        range.value = activeIdx;
+      }
+      if (counterTag) {
+        counterTag.innerText = `${activeIdx + 1} / ${total}`;
+      }
+
+      if (metaEl && movie) {
         metaEl.innerHTML = `
-          <div class="carousel-meta-title">${activeMovie.tmdb_title || activeMovie.title}</div>
+          <div class="carousel-meta-title">${movie.tmdb_title || movie.title}</div>
           <div class="carousel-meta-sub">
-            <span>${activeMovie.release_year || '—'}</span>
+            <span>${movie.release_year || '—'}</span>
             <span>•</span>
-            <span style="font-weight: 700; color: #2563eb;">${activeMovie.format || 'Blu-ray'}</span>
-            ${activeMovie.saga ? `<span>•</span> <span>${activeMovie.saga}</span>` : ''}
-            ${activeMovie.vote_average ? `<span>•</span> <span>★ ${Number(activeMovie.vote_average).toFixed(1)}</span>` : ''}
+            <span class="carousel-meta-format">${movie.format || 'Blu-ray'}</span>
           </div>
         `;
       }
 
-      if (actionsEl && activeMovie) {
-        const origIdx = getCurrentList().indexOf(activeMovie);
+      if (actionsEl && movie) {
+        const origIdx = getCurrentList().indexOf(movie);
         actionsEl.innerHTML = `
           <button class="btn-carousel-main" onclick="openDetail('${currentTab}', ${origIdx})">
             <span>📋</span>
             <span>Ouvrir la fiche complète</span>
           </button>
-          ${currentTab === 'collection' ? `
-            <button class="btn-carousel-icon" onclick="moveToWishlistFromDetail(${origIdx})" title="Déplacer vers mes souhaits" style="color: #e11d48;">
-              ♥
-            </button>
-          ` : currentTab === 'wishlist' ? `
-            <button class="btn-carousel-icon" onclick="acquireCurrentDetail(${origIdx})" title="Ajouter à ma collection" style="color: #0284c7;">
-              💿
-            </button>
-          ` : `
-            <button class="btn-carousel-icon" onclick="addFromNews(${origIdx}, 'collection')" title="Ajouter à ma collection" style="color: #0284c7;">
-              💿
-            </button>
-          `}
         `;
+      }
+    }
+
+    function renderOrbitCarousel() {
+      // Si les cartes ne sont pas encore construites ou nombre différent, reconstruire
+      const items = getFilteredMovies();
+      const viewport = document.getElementById("orbit-viewport");
+      const cardCount = viewport ? viewport.querySelectorAll(".orbit-item").length : 0;
+      if (!viewport || cardCount !== (items ? items.length : 0)) {
+        buildOrbitCards();
+      } else {
+        applyOrbitPositions();
       }
     }
 
@@ -3478,14 +3805,14 @@
       renderOrbitCarousel();
     }
 
-    // OUVERTURE DIRECTE DE LA FICHE AU CLIC/TOUCH
-    function onOrbitCardTap(filteredIdx, originalIdx) {
+    // CLIC DIRECT SUR LA CARTE = OUVERTURE DE LA FICHE COMPLÈTE
+    function onCardClick(filteredIdx, originalIdx) {
       if (hasDragged) return; // Si l'utilisateur faisait tourner la roue, ne pas ouvrir
       stopMomentum();
       openDetail(currentTab, originalIdx);
     }
 
-    // BOUCLE DE MOMENTUM / INERTIE
+    // BOUCLE DE MOMENTUM / INERTIE PHYSIQUE
     function startMomentumLoop() {
       stopMomentum();
       lastMomentumTime = performance.now();
@@ -3503,7 +3830,7 @@
       if (Math.abs(carouselVelocity) > 0.00015) {
         carouselProgress += carouselVelocity * dt;
 
-        // Limites avec amortissement
+        // Amortissement aux limites
         if (carouselProgress < 0) {
           carouselProgress = 0;
           carouselVelocity = 0;
@@ -3512,26 +3839,26 @@
           carouselVelocity = 0;
         }
 
-        // Frottement naturel (décélération progressive)
-        const friction = Math.pow(0.938, dt / 16);
+        // Décélération naturelle
+        const friction = Math.pow(0.935, dt / 16);
         carouselVelocity *= friction;
 
-        renderOrbitCarousel();
+        applyOrbitPositions();
         momentumRafId = requestAnimationFrame(momentumStep);
       } else {
-        // Rapprochement élastique doux vers la carte entière la plus proche
+        // Recalage doux sur l'affiche entière la plus proche
         const target = Math.round(carouselProgress);
         const diff = target - carouselProgress;
-        if (Math.abs(diff) > 0.008) {
+        if (Math.abs(diff) > 0.006) {
           carouselProgress += diff * 0.18;
-          renderOrbitCarousel();
+          applyOrbitPositions();
           momentumRafId = requestAnimationFrame(momentumStep);
         } else {
           carouselProgress = target;
           carouselVelocity = 0;
           momentumRafId = null;
           lastMomentumTime = 0;
-          renderOrbitCarousel();
+          applyOrbitPositions();
         }
       }
     }
@@ -3539,7 +3866,7 @@
     function onCarouselRangeInput(val) {
       stopMomentum();
       carouselProgress = parseInt(val, 10);
-      renderOrbitCarousel();
+      applyOrbitPositions();
     }
 
     function stepOrbit(delta) {
@@ -3556,16 +3883,16 @@
     }
 
     /* ============================================================
-       GESTION DES GESTES TACTILES & SOURIS (DRAG CONTINU + INERTIE)
+       GESTES TACTILES & SOURIS ULTRA-RÉACTIFS
        ============================================================ */
     function initOrbitGestures() {
       const viewport = document.getElementById("orbit-viewport");
       if (!viewport) return;
 
-      // 1. TOUCH EVENTS (iPhone / iPad / Safari)
+      // 1. TOUCH (iPhone / Safari / Android)
       viewport.addEventListener("touchstart", (e) => {
         if (!e.touches || e.touches.length !== 1) return;
-        stopMomentum(); // Arrêt immédiat de la roue au contact du doigt !
+        stopMomentum(); // Arrêt immédiat de la roue dès le contact du doigt
         isInteracting = true;
         hasDragged = false;
         isHorizontalGesture = null;
@@ -3584,13 +3911,13 @@
         const dx = currentX - dragStartX;
         const dy = currentY - dragStartY;
 
-        if (isHorizontalGesture === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) {
+        if (isHorizontalGesture === null && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
           isHorizontalGesture = Math.abs(dx) > Math.abs(dy);
         }
 
         if (isHorizontalGesture) {
-          if (e.cancelable) e.preventDefault(); // Isole le défilement horizontal (pas de saut de page)
-          if (Math.abs(dx) > 8) hasDragged = true;
+          if (e.cancelable) e.preventDefault(); // Isole le geste horizontal : AUCUN saut de page vertical
+          if (Math.abs(dx) > 6) hasDragged = true;
 
           const items = getFilteredMovies();
           const maxIdx = items ? items.length - 1 : 0;
@@ -3599,17 +3926,18 @@
           const progressDelta = -dx / PX_PER_CARD;
           carouselProgress = Math.max(0, Math.min(maxIdx, dragStartProgress + progressDelta));
 
-          // Calcul de la vitesse instantanée pour le lancer
+          // Vitesse instantanée pour le lancer
           const now = performance.now();
           const dt = now - lastDragTime;
-          if (dt > 10) {
+          if (dt > 8) {
             const instantVel = -(currentX - lastDragX) / (PX_PER_CARD * dt);
             carouselVelocity = carouselVelocity * 0.35 + instantVel * 0.65;
             lastDragX = currentX;
             lastDragTime = now;
           }
 
-          renderOrbitCarousel();
+          // Mise à jour fluide des positions CSS
+          applyOrbitPositions();
         }
       }, { passive: false });
 
@@ -3617,17 +3945,16 @@
         if (!isInteracting) return;
         isInteracting = false;
         if (hasDragged) {
-          // Lancer avec inertie si vitesse suffisante
-          if (Math.abs(carouselVelocity) > 0.0008) {
-            startMomentumLoop();
-          } else {
-            // Recaler doucement sur la carte la plus proche
-            startMomentumLoop();
-          }
+          startMomentumLoop();
         }
       });
 
-      // 2. MOUSE DRAG (Desktop PC/Mac)
+      viewport.addEventListener("touchcancel", () => {
+        isInteracting = false;
+        startMomentumLoop();
+      });
+
+      // 2. MOUSE DRAG (PC / Mac)
       viewport.addEventListener("mousedown", (e) => {
         stopMomentum();
         isInteracting = true;
@@ -3651,14 +3978,14 @@
 
         const now = performance.now();
         const dt = now - lastDragTime;
-        if (dt > 10) {
+        if (dt > 8) {
           const instantVel = -(currentX - lastDragX) / (PX_PER_CARD * dt);
           carouselVelocity = carouselVelocity * 0.35 + instantVel * 0.65;
           lastDragX = currentX;
           lastDragTime = now;
         }
 
-        renderOrbitCarousel();
+        applyOrbitPositions();
       });
 
       window.addEventListener("mouseup", () => {
@@ -3672,11 +3999,10 @@
       // 3. TRACKPAD SCROLL HORIZONTAL
       viewport.addEventListener("wheel", (e) => {
         const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
-        if (Math.abs(delta) > 5) {
+        if (Math.abs(delta) > 4) {
           e.preventDefault();
-          carouselVelocity += (delta / PX_PER_CARD) * 0.012;
-          // Limiter la vitesse maximale
-          carouselVelocity = Math.max(-0.03, Math.min(0.03, carouselVelocity));
+          carouselVelocity += (delta / PX_PER_CARD) * 0.015;
+          carouselVelocity = Math.max(-0.035, Math.min(0.035, carouselVelocity));
           if (!momentumRafId) {
             startMomentumLoop();
           }
@@ -3712,3 +4038,5 @@
       setViewMode(currentViewMode);
     });
 </script>
+</body>
+</html>
