@@ -3286,9 +3286,11 @@
       });
     }
 
-    let collection = JSON.parse(localStorage.getItem("cine_collection")) || DEFAULT_COLLECTION;
-    let wishlist = JSON.parse(localStorage.getItem("cine_wishlist")) || [
+    let rawCol = null;
+    try { rawCol = JSON.parse(localStorage.getItem("cine_collection")); } catch(e) {}
+    let collection = (Array.isArray(rawCol) && rawCol.length > 0) ? rawCol : DEFAULT_COLLECTION;
 
+    const DEFAULT_WISHLIST = [
       {
         title: "Dune : Deuxième Partie",
         tmdb_title: "Dune : Deuxième Partie",
@@ -3321,11 +3323,18 @@
       }
     ];
 
+    let rawWish = null;
+    try { rawWish = JSON.parse(localStorage.getItem("cine_wishlist")); } catch(e) {}
+    let wishlist = (Array.isArray(rawWish) && rawWish.length > 0) ? rawWish : DEFAULT_WISHLIST;
+
     let searchCache = {};
     let currentTab = "collection";
-        harmonizeSagas(collection);
+    harmonizeSagas(collection);
     harmonizeSagas(wishlist);
-    saveState();
+    try {
+      localStorage.setItem("cine_collection", JSON.stringify(collection));
+      localStorage.setItem("cine_wishlist", JSON.stringify(wishlist));
+    } catch(e) {}
     let selectedFormatFilter = "all";
     let selectedSagaFilter = "all";
     let selectedCategoryFilter = "all";
@@ -3575,23 +3584,25 @@
 
     function renderStats() {
       const items = getCurrentList();
-      const total = items.length;
-      const dvds = items.filter(m => m.format && m.format.includes("DVD")).length;
-      const blurays = items.filter(m => m.format === "Blu-ray").length;
-      const uhds = items.filter(m => m.format && m.format.includes("4K")).length;
-      const steelbooks = items.filter(m => m.edition === "Steelbook").length;
+      const total = items ? items.length : 0;
+      const dvds = items ? items.filter(m => m.format && m.format.includes("DVD")).length : 0;
+      const blurays = items ? items.filter(m => m.format === "Blu-ray").length : 0;
+      const uhds = items ? items.filter(m => m.format && m.format.includes("4K")).length : 0;
+      const steelbooks = items ? items.filter(m => m.edition === "Steelbook").length : 0;
 
       let label = "Collection";
       if (currentTab === "wishlist") label = "Souhaits";
       if (currentTab === "news") label = "Nouveautés 4K";
 
-      statsPills.innerHTML = `
-        <span class="stat-chip">Total ${label} : <strong>${total}</strong></span>
-        ${currentTab !== 'news' ? `<span class="stat-chip">DVD : <strong>${dvds}</strong></span>` : ''}
-        <span class="stat-chip">Blu-ray : <strong>${blurays}</strong></span>
-        <span class="stat-chip">4K UHD : <strong>${uhds}</strong></span>
-        <span class="stat-chip">Steelbook : <strong>${steelbooks}</strong></span>
-      `;
+      if (statsPills) {
+        statsPills.innerHTML = `
+          <span class="stat-chip">Total ${label} : <strong>${total}</strong></span>
+          ${currentTab !== 'news' ? `<span class="stat-chip">DVD : <strong>${dvds}</strong></span>` : ''}
+          <span class="stat-chip">Blu-ray : <strong>${blurays}</strong></span>
+          <span class="stat-chip">4K UHD : <strong>${uhds}</strong></span>
+          <span class="stat-chip">Steelbook : <strong>${steelbooks}</strong></span>
+        `;
+      }
     }
 
     function getFilteredMovies() {
@@ -4171,7 +4182,9 @@
       closeSearchModal();
     }
 
-    quickSearch.addEventListener("input", renderMovies);
+    if (quickSearch) {
+      quickSearch.addEventListener("input", renderMovies);
+    }
 
     // Raccourcis clavier (Echap & Cmd/Ctrl+K)
     window.addEventListener("keydown", (e) => {
@@ -4186,12 +4199,6 @@
       }
     });
 
-    updateCounts();
-    renderStats();
-    renderMovies();
-  </script>
-
-<script>
     /* ============================================================
        ROUE D'INERTIE CASINO & CONTRÔLES TACTILES AVANCÉS
        - Lancer rapide comme une roulette de casino
@@ -4727,9 +4734,17 @@
       });
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function initApp() {
       initOrbitGestures();
       initModalSwipeDismiss();
+      updateCounts();
+      renderStats();
       setViewMode(currentViewMode);
-    });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initApp);
+    } else {
+      initApp();
+    }
 </script>
