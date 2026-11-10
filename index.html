@@ -2566,6 +2566,257 @@
       background: #1e293b;
     }
 
+  
+    /* ============================================================
+       BARRE DE FILTRE PAR SAGA AU-DESSUS DES FILMS
+       ============================================================ */
+    .saga-filter-bar-wrap {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 0.4rem;
+      padding: 0 0.25rem;
+      flex-shrink: 0;
+      z-index: 30;
+    }
+    .saga-filter-scroll {
+      display: flex;
+      gap: 0.45rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 2px;
+    }
+    .saga-filter-scroll::-webkit-scrollbar { display: none; }
+
+    .saga-chip-btn {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: all 0.15s ease;
+    }
+    .saga-chip-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+    .saga-chip-btn.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.15);
+    }
+    .saga-chip-count {
+      font-size: 0.68rem;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    .saga-chip-btn.active .saga-chip-count {
+      background: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+    }
+
+    /* ============================================================
+       GRILLE CLASSIQUE (CORRECTION AFFICHAGE QUAND ON SWITCH)
+       ============================================================ */
+    body:not(.mode-carousel) {
+      height: auto !important;
+      overflow-y: auto !important;
+    }
+    body:not(.mode-carousel) main {
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+      padding: 1.25rem 1.25rem 5rem !important;
+    }
+    body:not(.mode-carousel) .grid {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)) !important;
+      gap: 1.5rem 1rem !important;
+      width: 100%;
+    }
+    @media (max-width: 680px) {
+      body:not(.mode-carousel) .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem 0.75rem !important;
+      }
+    }
+
+    /* ============================================================
+       RECHERCHE TMDB GRAND FORMAT (PLUS GRAND, CONFORTABLE)
+       ============================================================ */
+    .search-panel-box {
+      width: 95%;
+      max-width: 760px !important;
+      max-height: 88vh !important;
+      border-radius: 24px !important;
+    }
+    .search-input-header {
+      padding: 1rem 1.25rem !important;
+      gap: 0.75rem !important;
+    }
+    .search-live-input {
+      font-size: 1.15rem !important;
+      padding: 0.4rem 0 !important;
+    }
+    .search-saga-shortcuts {
+      display: flex;
+      gap: 0.45rem;
+      overflow-x: auto;
+      padding: 0.65rem 1.25rem 0.85rem;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: none;
+      align-items: center;
+    }
+    .search-saga-shortcuts::-webkit-scrollbar { display: none; }
+    .search-saga-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      white-space: nowrap;
+      margin-right: 0.25rem;
+    }
+    .btn-search-saga {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .btn-search-saga:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    /* BATCH ACTION BAR (TOUT AJOUTER AUX SOUHAITS) */
+    .search-batch-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+      background: #eff6ff;
+      border-bottom: 1px solid #bfdbfe;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .search-batch-text {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+    .btn-batch-wishlist {
+      background: #e11d48;
+      color: #ffffff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 2px 6px rgba(225, 29, 72, 0.3);
+      transition: transform 0.15s;
+    }
+    .btn-batch-wishlist:active {
+      transform: scale(0.96);
+    }
+
+    /* RÉSULTATS DE RECHERCHE AGRANDIS */
+    .search-row-item {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem !important;
+      padding: 0.85rem 1.15rem !important;
+      border-radius: 14px !important;
+      margin-bottom: 0.65rem;
+    }
+    .search-row-thumb {
+      width: 72px !important;
+      height: 108px !important;
+      border-radius: 8px !important;
+      flex-shrink: 0;
+    }
+    .search-row-title {
+      font-size: 1.12rem !important;
+      font-weight: 800 !important;
+      margin-bottom: 6px !important;
+    }
+    .search-row-meta {
+      font-size: 0.88rem !important;
+      color: var(--text-muted) !important;
+      gap: 0.5rem !important;
+    }
+    .search-row-tools {
+      display: flex;
+      gap: 0.55rem !important;
+      align-items: center;
+    }
+    .select-format-mini {
+      font-size: 0.88rem !important;
+      padding: 0.6rem 0.85rem !important;
+      border-radius: 8px !important;
+    }
+    .btn-row-action {
+      font-size: 0.88rem !important;
+      padding: 0.6rem 1rem !important;
+      border-radius: 8px !important;
+      font-weight: 700 !important;
+      min-height: 42px;
+    }
+
+    @media (max-width: 680px) {
+      .search-row-item {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+        padding: 0.85rem !important;
+      }
+      .search-row-main {
+        display: flex;
+        gap: 0.85rem;
+        align-items: center;
+      }
+      .search-row-thumb {
+        width: 65px !important;
+        height: 98px !important;
+      }
+      .search-row-tools {
+        width: 100% !important;
+        display: flex;
+        gap: 0.45rem !important;
+      }
+      .select-format-mini {
+        flex: 1.3 !important;
+      }
+      .btn-row-action {
+        flex: 1 !important;
+        justify-content: center !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -2768,6 +3019,13 @@
 
     <!-- TOOLBAR RETIRÉ SELON DEMANDE UTILISATEUR -->
 
+        <!-- BARRE DE FILTRAGE PAR SAGA (CURSEUR / BOUTONS HORIZONTAUX) -->
+    <div class="saga-filter-bar-wrap" id="saga-filter-bar-wrap">
+      <div class="saga-filter-scroll" id="saga-filter-scroll">
+        <!-- Rempli dynamiquement par renderSagaFilter() -->
+      </div>
+    </div>
+
     <div class="grid" id="movie-grid"></div>
 
     <!-- VUE CARROUSEL CIRCULAIRE 3D (ADAPTATION ORBITCAROUSEL + FLIP 3D) -->
@@ -2843,10 +3101,22 @@
   <!-- MODALE RECHERCHE TMDB -->
   <div class="modal-overlay" id="search-modal" onclick="closeSearchOnBackdrop(event)">
     <div class="search-panel-box">
-      <div class="search-input-header">
+            <div class="search-input-header">
         <span>🔍</span>
-        <input type="text" id="tmdb-query" class="search-live-input" placeholder="Rechercher sur TMDb (ex: Gladiator 2, Oppenheimer, Tarzan)...">
+        <input type="text" id="tmdb-query" class="search-live-input" placeholder="Rechercher un film ou une saga (Harry Potter, Marvel, Hunger Games)...">
         <button class="btn-close" style="position:static; width:28px; height:28px; background:#e2e8f0; color:#0f172a;" onclick="closeSearchModal()">✕</button>
+      </div>
+
+      <!-- Sagas rapides -->
+      <div class="search-saga-shortcuts">
+        <span class="search-saga-title">Sagas :</span>
+        <button class="btn-search-saga" onclick="quickSearchSaga('Harry Potter')">⚡ Harry Potter</button>
+        <button class="btn-search-saga" onclick="quickSearchSaga('Marvel Cinematic')">🦸 Marvel MCU</button>
+        <button class="btn-search-saga" onclick="quickSearchSaga('Hunger Games')">🏹 Hunger Games</button>
+        <button class="btn-search-saga" onclick="quickSearchSaga('Star Wars')">⭐ Star Wars</button>
+        <button class="btn-search-saga" onclick="quickSearchSaga('Le Seigneur des Anneaux')">💍 Tolkien</button>
+        <button class="btn-search-saga" onclick="quickSearchSaga('Batman')">🦇 Batman</button>
+        <button class="btn-search-saga" onclick="quickSearchSaga('Dune')">🪐 Dune</button>
       </div>
       <div class="search-live-list" id="search-live-list">
         <div style="text-align:center; padding: 2.5rem; color: var(--text-dim); font-size: 0.85rem;">
@@ -2904,6 +3174,7 @@
     let searchCache = {};
     let currentTab = "collection";
     let selectedFormatFilter = "all";
+    let selectedSagaFilter = "all";
     let selectedCategoryFilter = "all";
     let activeMovieIndex = null;
     let activeMovieSource = null;
@@ -2998,11 +3269,13 @@
       if (mode === "carousel") {
         if (gridEl) gridEl.style.display = "none";
         if (carEl) carEl.style.display = "flex";
-        renderCarousel();
       } else {
         if (gridEl) gridEl.style.display = "grid";
         if (carEl) carEl.style.display = "none";
       }
+
+      // Appeler TOUJOURS renderMovies() pour peupler immédiatement la grille ou le carrousel
+      renderMovies();
     }
 
     function updateCounts() {
@@ -3068,6 +3341,64 @@
       renderMovies();
     }
 
+    
+    function renderSagaFilter() {
+      const scrollEl = document.getElementById("saga-filter-scroll");
+      if (!scrollEl) return;
+
+      const items = getCurrentList();
+      const sagaCounts = {};
+      items.forEach(m => {
+        const s = m.saga || m.tmdb_collection;
+        if (s) {
+          sagaCounts[s] = (sagaCounts[s] || 0) + 1;
+        }
+      });
+
+      const sortedSagas = Object.keys(sagaCounts).sort((a, b) => sagaCounts[b] - sagaCounts[a]);
+
+      let chipsHtml = `
+        <button class="saga-chip-btn ${selectedSagaFilter === 'all' ? 'active' : ''}" onclick="setSagaFilter('all')">
+          <span>🍿 Toutes</span>
+          <span class="saga-chip-count">${items.length}</span>
+        </button>
+      `;
+
+      sortedSagas.forEach(saga => {
+        const count = sagaCounts[saga];
+        // Ajout d'icônes thématiques amusantes
+        let icon = "🎬";
+        const low = saga.toLowerCase();
+        if (low.includes("harry") || low.includes("potter")) icon = "⚡";
+        else if (low.includes("marvel") || low.includes("avengers") || low.includes("iron")) icon = "🦸";
+        else if (low.includes("hunger")) icon = "🏹";
+        else if (low.includes("spider")) icon = "🕷️";
+        else if (low.includes("star wars")) icon = "⭐";
+        else if (low.includes("hobbit") || low.includes("seigneur")) icon = "💍";
+        else if (low.includes("batman") || low.includes("dc")) icon = "🦇";
+        else if (low.includes("toy story")) icon = "🧸";
+        else if (low.includes("dune")) icon = "🪐";
+
+        const isAct = selectedSagaFilter.toLowerCase() === saga.toLowerCase();
+        chipsHtml += `
+          <button class="saga-chip-btn ${isAct ? 'active' : ''}" onclick="setSagaFilter('${saga.replace(/'/g, "\'")}')">
+            <span>${icon} ${saga}</span>
+            <span class="saga-chip-count">${count}</span>
+          </button>
+        `;
+      });
+
+      scrollEl.innerHTML = chipsHtml;
+    }
+
+    function setSagaFilter(saga) {
+      selectedSagaFilter = saga;
+      carouselProgress = 0;
+      if (typeof stopMomentum === 'function') stopMomentum();
+      renderSagaFilter();
+      renderMovies();
+    }
+
     function setCategoryFilter(cat) {
       selectedCategoryFilter = cat;
       document.querySelectorAll("#category-filters .pill-filter-btn").forEach(btn => {
@@ -3123,11 +3454,15 @@
                               (fmt === "Combo" && m.format && m.format.includes("Combo")) ||
                               (fmt === "Steelbook" && m.edition === "Steelbook");
         const matchesCat = cat === "all" || m.category === cat;
-        return matchesQuery && matchesFormat && matchesCat;
+        const matchesSaga = (selectedSagaFilter === "all") || 
+                            (m.saga && m.saga.toLowerCase().includes(selectedSagaFilter.toLowerCase())) || 
+                            (m.tmdb_collection && m.tmdb_collection.toLowerCase().includes(selectedSagaFilter.toLowerCase()));
+        return matchesQuery && matchesFormat && matchesCat && matchesSaga;
       });
     }
 
     function renderMovies() {
+      if (typeof renderSagaFilter === "function") renderSagaFilter();
       const items = getCurrentList();
       const filtered = getFilteredMovies();
 
@@ -3515,7 +3850,54 @@
       searchTimer = setTimeout(() => searchTMDb(q), 280);
     });
 
+    
+    let lastSearchResults = [];
+
+    function quickSearchSaga(sagaName) {
+      const qInput = document.getElementById("tmdb-query");
+      if (qInput) {
+        qInput.value = sagaName;
+        searchTMDb(sagaName);
+      }
+    }
+
+    function addAllSearchResultsToWishlist() {
+      if (!lastSearchResults || lastSearchResults.length === 0) return;
+      let addedCount = 0;
+      lastSearchResults.forEach(movie => {
+        const already = wishlist.some(w => w.tmdb_id === movie.id) || collection.some(c => c.tmdb_id === movie.id);
+        if (!already) {
+          const year = movie.release_date ? movie.release_date.slice(0, 4) : "";
+          wishlist.unshift({
+            title: movie.title,
+            tmdb_title: movie.title,
+            original_title: movie.original_title || "",
+            tmdb_id: movie.id,
+            saga: "",
+            tmdb_collection: "",
+            format: "4K UHD",
+            edition: "Standard",
+            category: "Film",
+            release_year: year,
+            vote_average: movie.vote_average || 0,
+            runtime: 0,
+            genres: "",
+            overview: movie.overview || "Aucun synopsis.",
+            poster_url: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "",
+            backdrop_url: movie.backdrop_path ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}` : ""
+          });
+          addedCount++;
+        }
+      });
+      saveState();
+      renderStats();
+      renderMovies();
+      showToast(`♥ ${addedCount} film(s) ajoutés à vos souhaits !`);
+      closeSearchModal();
+    }
+
     async function searchTMDb(query) {
+      lastSearchResults = [];
       searchList.innerHTML = '<div style="text-align:center; padding: 2rem; color: var(--text-muted); font-size: 0.84rem;">Recherche sur TMDb...</div>';
       try {
         const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=fr-FR&page=1`;
@@ -3529,9 +3911,19 @@
         }
 
         searchCache = {};
+        lastSearchResults = results.slice(0, 15);
         results.forEach(m => { searchCache[m.id] = m; });
 
-        searchList.innerHTML = results.slice(0, 8).map(movie => {
+        const batchBar = `
+          <div class="search-batch-bar">
+            <span class="search-batch-text">${lastSearchResults.length} films trouvés pour "${query}"</span>
+            <button class="btn-batch-wishlist" onclick="addAllSearchResultsToWishlist()">
+              ♥ Tout ajouter aux souhaits (${lastSearchResults.length})
+            </button>
+          </div>
+        `;
+
+        searchList.innerHTML = batchBar + lastSearchResults.map(movie => {
           const poster = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : '';
           const year = movie.release_date ? movie.release_date.slice(0, 4) : '—';
           const score = movie.vote_average ? movie.vote_average.toFixed(1) : '—';
@@ -3741,7 +4133,8 @@
                   <div class="orbit-badges-row">
                     <span class="orbit-badge-format">${m.format || 'Blu-ray'}</span>
                   </div>
-                  <!-- LOGO LIKE DANS LE COIN INFÉRIEUR DROIT DU POSTER -->
+                  <!-- LOGO LIKE DANS LE COIN INFÉRIEUR DROIT : UNIQUEMENT DANS SOUHAITS OU NOUVEAUTÉS, PAS DANS MA COLLECTION -->
+                  ${currentTab !== 'collection' ? `
                   <button class="orbit-card-like-btn ${isFav ? 'active' : ''}" 
                           id="orbit-like-${originalIndex}"
                           onclick="event.stopPropagation(); toggleLikeFromCard(${originalIndex})" 
@@ -3751,6 +4144,7 @@
                       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                     </svg>
                   </button>
+                  ` : ''}
                 </div>
               </div>
             </div>
