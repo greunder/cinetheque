@@ -282,7 +282,12 @@
     }
 
     /* TOOLBAR */
+    
     .toolbar {
+      display: none !important;
+    }
+
+    .legacy-toolbar {
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
@@ -1079,10 +1084,31 @@
       }
 
       .header-inner {
-        padding: 0.65rem 0.85rem;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.65rem;
+        padding: 0.5rem 0.85rem !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 0.5rem !important;
+      }
+      .brand-name {
+        font-size: 1.05rem !important;
+      }
+      .brand-subtext {
+        display: none !important;
+      }
+      .btn-search-label, .kbd-tag {
+        display: none !important;
+      }
+      .btn-search-trigger {
+        padding: 0.45rem 0.65rem !important;
+        min-width: 0 !important;
+      }
+      .view-mode-pill {
+        padding: 2px !important;
+      }
+      .btn-toggle-view {
+        padding: 0.35rem 0.65rem !important;
+        font-size: 0.8rem !important;
       }
 
       .brand-link {
@@ -1133,7 +1159,12 @@
         font-size: 1.05rem;
       }
 
-      .toolbar {
+      
+    .toolbar {
+      display: none !important;
+    }
+
+    .legacy-toolbar {
         gap: 0.85rem;
         margin-bottom: 1.25rem;
         padding-bottom: 1rem;
@@ -2004,7 +2035,38 @@
       box-sizing: border-box;
     }
 
+    
+    /* LISERÉ ARGENTÉ (METALLIC SILVER / CHROME) */
+    .orbit-face {
+      border: 2px solid #cbd5e1 !important;
+      box-shadow: 0 14px 34px -6px rgba(15, 23, 42, 0.22), 0 0 10px rgba(203, 213, 225, 0.4);
+    }
     .orbit-item.main .orbit-face {
+      border: 3px solid #e2e8f0 !important;
+      box-shadow: 0 20px 48px -6px rgba(100, 116, 139, 0.38), 0 0 18px rgba(226, 232, 240, 0.95), inset 0 0 0 1px rgba(255, 255, 255, 0.85) !important;
+    }
+
+    /* PULL BAR AND SWIPE DOWN TO DISMISS FOR MODAL */
+    .modal-pull-handle {
+      width: 44px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      cursor: grab;
+    }
+    .detail-card {
+      position: relative;
+      touch-action: pan-y;
+      will-change: transform;
+    }
+
+    .legacy-main-orbit {
       border: 3px solid #2563eb;
       box-shadow: 0 20px 45px -5px rgba(37, 99, 235, 0.32), 0 8px 20px rgba(15, 23, 42, 0.15);
     }
@@ -2323,7 +2385,38 @@
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
+    
+    /* LISERÉ ARGENTÉ (METALLIC SILVER / CHROME) */
+    .orbit-face {
+      border: 2px solid #cbd5e1 !important;
+      box-shadow: 0 14px 34px -6px rgba(15, 23, 42, 0.22), 0 0 10px rgba(203, 213, 225, 0.4);
+    }
     .orbit-item.main .orbit-face {
+      border: 3px solid #e2e8f0 !important;
+      box-shadow: 0 20px 48px -6px rgba(100, 116, 139, 0.38), 0 0 18px rgba(226, 232, 240, 0.95), inset 0 0 0 1px rgba(255, 255, 255, 0.85) !important;
+    }
+
+    /* PULL BAR AND SWIPE DOWN TO DISMISS FOR MODAL */
+    .modal-pull-handle {
+      width: 44px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      cursor: grab;
+    }
+    .detail-card {
+      position: relative;
+      touch-action: pan-y;
+      will-change: transform;
+    }
+
+    .legacy-main-orbit {
       border: 3px solid #2563eb;
       box-shadow: 0 22px 48px -6px rgba(37, 99, 235, 0.4), 0 8px 22px rgba(15, 23, 42, 0.2);
     }
@@ -2585,12 +2678,12 @@
   </aside>
 
 
-  <!-- HEADER -->
+  <!-- HEADER PARFAITEMENT ALIGNÉ ET DROIT -->
   <header>
     <div class="header-inner">
       <div class="header-left-col">
         <button class="btn-sidebar-toggle" onclick="toggleSidebar(true)" aria-label="Ouvrir le menu" title="Menu latéral">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round">
             <line x1="3" y1="6" x2="21" y2="6"/>
             <line x1="3" y1="12" x2="21" y2="12"/>
             <line x1="3" y1="18" x2="21" y2="18"/>
@@ -2599,66 +2692,59 @@
 
         <a href="#" class="brand-link" onclick="toggleSidebar(true)">
           <div class="brand-icon-wrap real-disc-wrap" style="background: transparent; box-shadow: none;">
-          <svg viewBox="0 0 100 100" class="real-disc-svg" width="38" height="38">
-            <defs>
-              <radialGradient id="discMetal" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="42%" stop-color="#f1f5f9"/>
-                <stop offset="60%" stop-color="#e2e8f0"/>
-                <stop offset="85%" stop-color="#f8fafc"/>
-                <stop offset="100%" stop-color="#94a3b8"/>
-              </radialGradient>
-              <linearGradient id="discHolo" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="rgba(56, 189, 248, 0.42)"/>
-                <stop offset="25%" stop-color="rgba(168, 85, 247, 0.38)"/>
-                <stop offset="50%" stop-color="rgba(244, 63, 94, 0.35)"/>
-                <stop offset="75%" stop-color="rgba(234, 179, 8, 0.38)"/>
-                <stop offset="100%" stop-color="rgba(56, 189, 248, 0.42)"/>
-              </linearGradient>
-              <linearGradient id="discSheen" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(255, 255, 255, 0.85)"/>
-                <stop offset="45%" stop-color="rgba(255, 255, 255, 0.15)"/>
-                <stop offset="55%" stop-color="rgba(255, 255, 255, 0)"/>
-                <stop offset="100%" stop-color="rgba(255, 255, 255, 0.8)"/>
-              </linearGradient>
-            </defs>
-            <circle cx="50" cy="50" r="48" fill="url(#discMetal)" stroke="#94a3b8" stroke-width="1.2" filter="drop-shadow(0 3px 6px rgba(15,23,42,0.18))"/>
-            <circle cx="50" cy="50" r="46" fill="url(#discHolo)"/>
-            <circle cx="50" cy="50" r="46" fill="url(#discSheen)"/>
-            <circle cx="50" cy="50" r="41" fill="none" stroke="rgba(255, 255, 255, 0.55)" stroke-width="0.8" stroke-dasharray="75 18"/>
-            <circle cx="50" cy="50" r="33" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="0.6"/>
-            <circle cx="50" cy="50" r="25" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.6"/>
-            <circle cx="50" cy="50" r="18" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
-            <circle cx="50" cy="50" r="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.75"/>
-            <circle cx="50" cy="50" r="7.5" fill="#f1f5f9" stroke="#64748b" stroke-width="1.2"/>
-          </svg>
-        </div>
+            <svg viewBox="0 0 100 100" class="real-disc-svg" width="36" height="36">
+              <defs>
+                <radialGradient id="discMetal" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="42%" stop-color="#f1f5f9"/>
+                  <stop offset="60%" stop-color="#e2e8f0"/>
+                  <stop offset="85%" stop-color="#f8fafc"/>
+                  <stop offset="100%" stop-color="#94a3b8"/>
+                </radialGradient>
+                <linearGradient id="discHolo" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(56, 189, 248, 0.42)"/>
+                  <stop offset="25%" stop-color="rgba(168, 85, 247, 0.38)"/>
+                  <stop offset="50%" stop-color="rgba(244, 63, 94, 0.35)"/>
+                  <stop offset="75%" stop-color="rgba(234, 179, 8, 0.38)"/>
+                  <stop offset="100%" stop-color="rgba(56, 189, 248, 0.42)"/>
+                </linearGradient>
+                <linearGradient id="discSheen" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(255, 255, 255, 0.85)"/>
+                  <stop offset="45%" stop-color="rgba(255, 255, 255, 0.15)"/>
+                  <stop offset="55%" stop-color="rgba(255, 255, 255, 0)"/>
+                  <stop offset="100%" stop-color="rgba(255, 255, 255, 0.8)"/>
+                </linearGradient>
+              </defs>
+              <circle cx="50" cy="50" r="48" fill="url(#discMetal)" stroke="#94a3b8" stroke-width="1.2" filter="drop-shadow(0 3px 6px rgba(15,23,42,0.18))"/>
+              <circle cx="50" cy="50" r="46" fill="url(#discHolo)"/>
+              <circle cx="50" cy="50" r="46" fill="url(#discSheen)"/>
+              <circle cx="50" cy="50" r="41" fill="none" stroke="rgba(255, 255, 255, 0.55)" stroke-width="0.8" stroke-dasharray="75 18"/>
+              <circle cx="50" cy="50" r="33" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="0.6"/>
+              <circle cx="50" cy="50" r="25" fill="none" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.6"/>
+              <circle cx="50" cy="50" r="18" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+              <circle cx="50" cy="50" r="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.75"/>
+              <circle cx="50" cy="50" r="7.5" fill="#f1f5f9" stroke="#64748b" stroke-width="1.2"/>
+            </svg>
+          </div>
           <div class="brand-text-col">
             <span class="brand-name">CinéThèque</span>
-            <span class="brand-subtext">Collection & 4K UHD</span>
           </div>
         </a>
-
-        <button class="active-section-indicator" id="headerActiveBadge" onclick="toggleSidebar(true)" title="Changer d'onglet">
-          <span>💿 Ma Collection</span>
-          <span style="font-size: 0.65rem; opacity: 0.7;">▼</span>
-        </button>
       </div>
 
       <div class="header-actions">
         <div class="view-mode-pill" id="headerViewModePill">
-          <button id="btnViewGrid" class="btn-toggle-view active" onclick="setViewMode('grid')" title="Vue Grille">
-            <span>⊞</span>
+          <button id="btnViewCarousel" class="btn-toggle-view active" onclick="setViewMode('carousel')" title="Vue Carrousel 3D">
+            <span>🎡 Orbit</span>
           </button>
-          <button id="btnViewCarousel" class="btn-toggle-view" onclick="setViewMode('carousel')" title="Vue Carrousel Circulaire 3D (Une main)">
-            <span>🎡</span>
+          <button id="btnViewGrid" class="btn-toggle-view" onclick="setViewMode('grid')" title="Vue Grille">
+            <span>⊞</span>
           </button>
         </div>
 
-        <button class="btn-search-trigger" onclick="openSearchModal()">
+        <button class="btn-search-trigger" onclick="openSearchModal()" title="Rechercher un film">
           <span>🔍</span>
-          <span>Ajouter...</span>
-          <span class="kbd-tag">⌘K</span>
+          <span class="btn-search-label">Ajouter</span>
         </button>
       </div>
     </div>
@@ -2680,36 +2766,7 @@
       </div>
     </div>
 
-    <!-- TOOLBAR -->
-    <div class="toolbar">
-      <div class="toolbar-row-top">
-        <div class="stats-pills" id="stats-pills"></div>
-
-        <div class="quick-search-box">
-          <span class="quick-search-icon">🔍</span>
-          <input type="text" id="quick-search" placeholder="Rechercher par titre, saga, TMDb ID...">
-        </div>
-      </div>
-
-      <div class="filter-pills-bar">
-        <div class="filter-group" id="format-filters">
-          <span class="filter-label">Support :</span>
-          <button class="pill-filter-btn active" data-fmt="all" onclick="setFormatFilter('all')">Tous</button>
-          <button class="pill-filter-btn" data-fmt="DVD" onclick="setFormatFilter('DVD')">DVD</button>
-          <button class="pill-filter-btn" data-fmt="Blu-ray" onclick="setFormatFilter('Blu-ray')">Blu-ray</button>
-          <button class="pill-filter-btn" data-fmt="4K UHD" onclick="setFormatFilter('4K UHD')">4K UHD</button>
-          <button class="pill-filter-btn" data-fmt="Steelbook" onclick="setFormatFilter('Steelbook')">Steelbook</button>
-          <button class="pill-filter-btn" data-fmt="Combo" onclick="setFormatFilter('Combo')">Combo</button>
-        </div>
-
-        <div class="filter-group" id="category-filters">
-          <span class="filter-label">Genre :</span>
-          <button class="pill-filter-btn active" data-cat="all" onclick="setCategoryFilter('all')">Tous</button>
-          <button class="pill-filter-btn" data-cat="Film" onclick="setCategoryFilter('Film')">Films</button>
-          <button class="pill-filter-btn" data-cat="Animation" onclick="setCategoryFilter('Animation')">Animation</button>
-        </div>
-      </div>
-    </div>
+    <!-- TOOLBAR RETIRÉ SELON DEMANDE UTILISATEUR -->
 
     <div class="grid" id="movie-grid"></div>
 
@@ -2759,6 +2816,7 @@
   <!-- MODALE FICHE DÉTAILLÉE -->
   <div class="modal-overlay" id="detail-modal" onclick="closeDetailOnBackdrop(event)">
     <div class="detail-card">
+      <div class="modal-pull-handle"></div>
       <div class="hero-banner" id="hero-banner">
         <button class="btn-close" onclick="closeDetail()">✕</button>
       </div>
@@ -3579,16 +3637,17 @@
 
 <script>
     /* ============================================================
-       ROUE D'INERTIE CONTINUE & CARROUSEL FLUIDE SANS RE-RENDER DOM
-       - Stabilité DOM totale (aucun innerHTML pendant le geste -> pas de perte de touch)
-       - Affiches centrales nettement plus grandes (scale 1.15 vs 0.85)
-       - Bouton Like (coeur) directement dans le coin inférieur droit du poster
-       - Bandeau bas épuré : Uniquement Titre, Année et Format
-       - Plein écran sans scroll vertical sur la page
+       ROUE D'INERTIE CASINO & CONTRÔLES TACTILES AVANCÉS
+       - Lancer rapide comme une roulette de casino
+       - Clic sur la roue en rotation = ARRÊT IMMÉDIAT
+       - Clic à l'arrêt = ouverture fiche détaillée
+       - Glisser vers le bas sur la fiche = fermeture de la page
+       - Liseré argenté métallique
        ============================================================ */
-    let carouselProgress = 0;       // Position continue flottante (0.0 .. N-1)
+    let carouselProgress = 0;       // Position continue (0.0 .. N-1)
     let carouselVelocity = 0;       // Vitesse angulaire (progress/ms)
-    let isInteracting = false;      // Doigt ou souris maintenu
+    let isInteracting = false;      // Doigt ou souris enfoncé
+    let isWheelSpinning = false;    // En rotation rapide type roulette
     let dragStartX = 0;
     let dragStartY = 0;
     let dragStartProgress = 0;
@@ -3599,7 +3658,7 @@
     let momentumRafId = null;
     let lastMomentumTime = 0;
 
-    const PX_PER_CARD = 145;        // Pixels de déplacement pour avancer d'une carte
+    const PX_PER_CARD = 140;
 
     function isMovieInWishlist(m) {
       if (!m) return false;
@@ -3621,7 +3680,6 @@
       }
       saveState();
       
-      // Mise à jour visuelle immédiate de l'icône coeur
       const likeBtn = document.getElementById("orbit-like-" + originalIndex);
       if (likeBtn) {
         const isNowFav = isMovieInWishlist(m);
@@ -3636,6 +3694,7 @@
 
     function stopMomentum() {
       carouselVelocity = 0;
+      isWheelSpinning = false;
       if (momentumRafId) {
         cancelAnimationFrame(momentumRafId);
         momentumRafId = null;
@@ -3643,7 +3702,7 @@
       lastMomentumTime = 0;
     }
 
-    // Création initiale des cartes DOM (appelée uniquement au changement de liste ou filtres)
+    // Construction unique du DOM
     function buildOrbitCards() {
       const items = getFilteredMovies();
       const viewport = document.getElementById("orbit-viewport");
@@ -3653,7 +3712,7 @@
         viewport.innerHTML = `
           <div style="color:var(--text-dim); text-align:center; padding: 2.5rem 1rem;">
             <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🔍</div>
-            <p style="font-size: 0.95rem; font-weight:600;">Aucun film ne correspond à vos filtres.</p>
+            <p style="font-size: 0.95rem; font-weight:600;">Aucun film dans cette liste.</p>
           </div>
         `;
         const metaEl = document.getElementById("carousel-film-meta");
@@ -3682,7 +3741,7 @@
                   <div class="orbit-badges-row">
                     <span class="orbit-badge-format">${m.format || 'Blu-ray'}</span>
                   </div>
-                  <!-- LOGO DU LIKE DANS LE COIN INFÉRIEUR DROIT DU POSTER -->
+                  <!-- LOGO LIKE DANS LE COIN INFÉRIEUR DROIT DU POSTER -->
                   <button class="orbit-card-like-btn ${isFav ? 'active' : ''}" 
                           id="orbit-like-${originalIndex}"
                           onclick="event.stopPropagation(); toggleLikeFromCard(${originalIndex})" 
@@ -3702,7 +3761,7 @@
       applyOrbitPositions();
     }
 
-    // Mise à jour continue des positions par transformation CSS (SANS TOUCHER AU DOM)
+    // Calcul direct des positions 3D
     function applyOrbitPositions() {
       const items = getFilteredMovies();
       if (!items || items.length === 0) return;
@@ -3725,7 +3784,6 @@
         const offset = idx - carouselProgress;
         const absOffset = Math.abs(offset);
 
-        // Au-delà de 3.6 cartes de distance, masquer pour préserver le GPU
         if (absOffset > 3.6) {
           card.style.display = "none";
           continue;
@@ -3738,7 +3796,7 @@
         const tx = Math.sin(rad) * radius;
         const tz = (Math.cos(rad) - 1) * radius;
 
-        // ÉCHELLE : LA CARTE CENTRALE EST NETTEMENT PLUS GRANDE (1.15) QUE CELLES SUR LES CÔTÉS (0.86, 0.68)
+        // Affiche centrale nettement plus grande (1.15) que les côtés
         const scale = Math.max(0.48, 1.15 - absOffset * 0.24);
         const opacity = Math.max(0.12, 1 - absOffset * 0.26);
         const zIndex = Math.round(100 - absOffset * 15);
@@ -3749,7 +3807,6 @@
         card.classList.toggle("main", absOffset < 0.5);
       }
 
-      // BANDEAU DU BAS : UNIQUEMENT TITRE, ANNÉE ET FORMAT
       updateBottomBar(items[activeIntIdx], activeIntIdx, total);
     }
 
@@ -3790,7 +3847,6 @@
     }
 
     function renderOrbitCarousel() {
-      // Si les cartes ne sont pas encore construites ou nombre différent, reconstruire
       const items = getFilteredMovies();
       const viewport = document.getElementById("orbit-viewport");
       const cardCount = viewport ? viewport.querySelectorAll(".orbit-item").length : 0;
@@ -3805,17 +3861,26 @@
       renderOrbitCarousel();
     }
 
-    // CLIC DIRECT SUR LA CARTE = OUVERTURE DE LA FICHE COMPLÈTE
+    // CLIC CARTE : SI LA ROUE TOURNE ENCORE -> L'ARRÊTER ! SI ARRÊTÉE -> OUVRIR LA FICHE
     function onCardClick(filteredIdx, originalIdx) {
-      if (hasDragged) return; // Si l'utilisateur faisait tourner la roue, ne pas ouvrir
+      if (hasDragged) return;
+
+      if (isWheelSpinning || Math.abs(carouselVelocity) > 0.0008) {
+        // Stopper net la roulette sans ouvrir la fiche !
+        stopMomentum();
+        applyOrbitPositions();
+        return;
+      }
+
       stopMomentum();
       openDetail(currentTab, originalIdx);
     }
 
-    // BOUCLE DE MOMENTUM / INERTIE PHYSIQUE
+    // PHYSIQUE DE ROULETTE DE CASINO (GRAND ÉLAN + DÉCÉLÉRATION NATURELLE)
     function startMomentumLoop() {
       stopMomentum();
       lastMomentumTime = performance.now();
+      isWheelSpinning = true;
       momentumRafId = requestAnimationFrame(momentumStep);
     }
 
@@ -3826,11 +3891,12 @@
 
       const items = getFilteredMovies();
       const maxIdx = items ? items.length - 1 : 0;
+      const currentSpeed = Math.abs(carouselVelocity);
 
-      if (Math.abs(carouselVelocity) > 0.00015) {
+      if (currentSpeed > 0.00018) {
         carouselProgress += carouselVelocity * dt;
 
-        // Amortissement aux limites
+        // Limites avec amortissement
         if (carouselProgress < 0) {
           carouselProgress = 0;
           carouselVelocity = 0;
@@ -3839,25 +3905,24 @@
           carouselVelocity = 0;
         }
 
-        // Décélération naturelle
-        const friction = Math.pow(0.935, dt / 16);
+        // Frottement casino : très faible à grande vitesse pour tourner longtemps, plus fort en fin
+        const frictionBase = currentSpeed > 0.015 ? 0.978 : (currentSpeed > 0.004 ? 0.962 : 0.93);
+        const friction = Math.pow(frictionBase, dt / 16);
         carouselVelocity *= friction;
 
         applyOrbitPositions();
         momentumRafId = requestAnimationFrame(momentumStep);
       } else {
-        // Recalage doux sur l'affiche entière la plus proche
+        // Recalage élastique doux sur la carte la plus proche
         const target = Math.round(carouselProgress);
         const diff = target - carouselProgress;
-        if (Math.abs(diff) > 0.006) {
-          carouselProgress += diff * 0.18;
+        if (Math.abs(diff) > 0.005) {
+          carouselProgress += diff * 0.16;
           applyOrbitPositions();
           momentumRafId = requestAnimationFrame(momentumStep);
         } else {
           carouselProgress = target;
-          carouselVelocity = 0;
-          momentumRafId = null;
-          lastMomentumTime = 0;
+          stopMomentum();
           applyOrbitPositions();
         }
       }
@@ -3874,7 +3939,7 @@
       const items = getFilteredMovies();
       if (!items || items.length === 0) return;
       const target = Math.max(0, Math.min(items.length - 1, Math.round(carouselProgress) + delta));
-      carouselVelocity = (target - carouselProgress) * 0.006;
+      carouselVelocity = (target - carouselProgress) * 0.008;
       startMomentumLoop();
     }
 
@@ -3882,19 +3947,25 @@
       stepOrbit(delta);
     }
 
-    /* ============================================================
-       GESTES TACTILES & SOURIS ULTRA-RÉACTIFS
-       ============================================================ */
+    /* GESTES DE LANCER TYPE CASINO & ARRÊT AU CLIC */
     function initOrbitGestures() {
       const viewport = document.getElementById("orbit-viewport");
       if (!viewport) return;
 
-      // 1. TOUCH (iPhone / Safari / Android)
+      // 1. TOUCH (Mobile)
       viewport.addEventListener("touchstart", (e) => {
         if (!e.touches || e.touches.length !== 1) return;
-        stopMomentum(); // Arrêt immédiat de la roue dès le contact du doigt
+        
+        // Si la roue tournait à grande vitesse, le toucher stoppe la course immédiatement
+        const wasSpinning = (Math.abs(carouselVelocity) > 0.001);
+        stopMomentum();
+        if (wasSpinning) {
+          hasDragged = true; // Empêche le clic involontaire d'ouvrir la fiche
+        } else {
+          hasDragged = false;
+        }
+
         isInteracting = true;
-        hasDragged = false;
         isHorizontalGesture = null;
 
         dragStartX = e.touches[0].clientX;
@@ -3916,27 +3987,24 @@
         }
 
         if (isHorizontalGesture) {
-          if (e.cancelable) e.preventDefault(); // Isole le geste horizontal : AUCUN saut de page vertical
+          if (e.cancelable) e.preventDefault();
           if (Math.abs(dx) > 6) hasDragged = true;
 
           const items = getFilteredMovies();
           const maxIdx = items ? items.length - 1 : 0;
           
-          // Maintien du doigt : défilement continu proportionnel
           const progressDelta = -dx / PX_PER_CARD;
           carouselProgress = Math.max(0, Math.min(maxIdx, dragStartProgress + progressDelta));
 
-          // Vitesse instantanée pour le lancer
           const now = performance.now();
           const dt = now - lastDragTime;
           if (dt > 8) {
             const instantVel = -(currentX - lastDragX) / (PX_PER_CARD * dt);
-            carouselVelocity = carouselVelocity * 0.35 + instantVel * 0.65;
+            carouselVelocity = carouselVelocity * 0.25 + instantVel * 0.75;
             lastDragX = currentX;
             lastDragTime = now;
           }
 
-          // Mise à jour fluide des positions CSS
           applyOrbitPositions();
         }
       }, { passive: false });
@@ -3945,7 +4013,15 @@
         if (!isInteracting) return;
         isInteracting = false;
         if (hasDragged) {
-          startMomentumLoop();
+          const rawSpeed = Math.abs(carouselVelocity);
+          // AMPLIFICATION ROULETTE CASINO : si lancer rapide, booster l'élan pour défiler vite et loin
+          if (rawSpeed > 0.002) {
+            const casinoBoost = rawSpeed > 0.012 ? 2.6 : 1.7;
+            carouselVelocity = Math.max(-0.065, Math.min(0.065, carouselVelocity * casinoBoost));
+            startMomentumLoop();
+          } else {
+            startMomentumLoop();
+          }
         }
       });
 
@@ -3954,11 +4030,17 @@
         startMomentumLoop();
       });
 
-      // 2. MOUSE DRAG (PC / Mac)
+      // 2. MOUSE DRAG (Desktop)
       viewport.addEventListener("mousedown", (e) => {
+        const wasSpinning = (Math.abs(carouselVelocity) > 0.001);
         stopMomentum();
+        if (wasSpinning) {
+          hasDragged = true;
+        } else {
+          hasDragged = false;
+        }
+
         isInteracting = true;
-        hasDragged = false;
         dragStartX = e.clientX;
         dragStartProgress = carouselProgress;
         lastDragX = dragStartX;
@@ -3980,7 +4062,7 @@
         const dt = now - lastDragTime;
         if (dt > 8) {
           const instantVel = -(currentX - lastDragX) / (PX_PER_CARD * dt);
-          carouselVelocity = carouselVelocity * 0.35 + instantVel * 0.65;
+          carouselVelocity = carouselVelocity * 0.25 + instantVel * 0.75;
           lastDragX = currentX;
           lastDragTime = now;
         }
@@ -3992,6 +4074,11 @@
         if (!isInteracting) return;
         isInteracting = false;
         if (hasDragged) {
+          const rawSpeed = Math.abs(carouselVelocity);
+          if (rawSpeed > 0.002) {
+            const casinoBoost = rawSpeed > 0.012 ? 2.6 : 1.7;
+            carouselVelocity = Math.max(-0.065, Math.min(0.065, carouselVelocity * casinoBoost));
+          }
           startMomentumLoop();
         }
       });
@@ -4001,8 +4088,8 @@
         const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
         if (Math.abs(delta) > 4) {
           e.preventDefault();
-          carouselVelocity += (delta / PX_PER_CARD) * 0.015;
-          carouselVelocity = Math.max(-0.035, Math.min(0.035, carouselVelocity));
+          carouselVelocity += (delta / PX_PER_CARD) * 0.022;
+          carouselVelocity = Math.max(-0.065, Math.min(0.065, carouselVelocity));
           if (!momentumRafId) {
             startMomentumLoop();
           }
@@ -4033,10 +4120,70 @@
       });
     }
 
+    /* GLISSER VERS LE BAS POUR FERMER LA FICHE DU FILM */
+    function initModalSwipeDismiss() {
+      const card = document.querySelector(".detail-card");
+      const modal = document.getElementById("detail-modal");
+      if (!card || !modal) return;
+
+      let startY = 0;
+      let currentY = 0;
+      let isSwipingDown = false;
+      let isAtTop = false;
+
+      card.addEventListener("touchstart", (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const body = card.querySelector(".detail-body");
+        isAtTop = !body || body.scrollTop <= 5;
+        startY = e.touches[0].clientY;
+        currentY = startY;
+        isSwipingDown = false;
+        card.style.transition = "none";
+      }, { passive: true });
+
+      card.addEventListener("touchmove", (e) => {
+        if (!isAtTop || !e.touches || e.touches.length !== 1) return;
+        const y = e.touches[0].clientY;
+        currentY = y;
+        const dy = y - startY;
+
+        if (dy > 8) {
+          isSwipingDown = true;
+          if (e.cancelable) e.preventDefault();
+          card.style.transform = `translateY(${Math.max(0, dy)}px)`;
+          const opacity = Math.max(0, 1 - (dy / 450));
+          modal.style.backgroundColor = `rgba(15, 23, 42, ${0.7 * opacity})`;
+        }
+      }, { passive: false });
+
+      card.addEventListener("touchend", () => {
+        if (!isSwipingDown) return;
+        isSwipingDown = false;
+        const dy = currentY - startY;
+        card.style.transition = "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)";
+
+        if (dy > 85) {
+          card.style.transform = "translateY(100%)";
+          setTimeout(() => {
+            closeDetail();
+            card.style.transform = "";
+            card.style.transition = "";
+            modal.style.backgroundColor = "";
+          }, 240);
+        } else {
+          card.style.transform = "translateY(0)";
+          modal.style.backgroundColor = "";
+          setTimeout(() => {
+            card.style.transform = "";
+            card.style.transition = "";
+          }, 260);
+        }
+      });
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       initOrbitGestures();
+      initModalSwipeDismiss();
       setViewMode(currentViewMode);
     });
 </script>
-</body>
-</html>
